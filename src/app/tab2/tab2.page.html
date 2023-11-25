@@ -1,17 +1,71 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
+    <ion-title style="text-align: center;">
+      José Pinos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <p style="text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 25px;">Bienvenido a mi CV.</p>
+  <div class="contenedor_imagen" style="display: flex; flex-direction: column; align-items: center; margin-top: 30px;">
+    <ion-img src="assets/images/Yo.png" style="width: 150px; height: 150px; margin-bottom: 10px;"></ion-img>
+  </div>
+  <p style="text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 20px; margin-bottom: 45px;">Saludos, soy un estudiante ecuatoriano de Desarrollo de Software</p>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div class="info">
+    <ion-grid>
+      <ion-row style="align-items: center; margin-left: 50px;">
+        <ion-col> <ion-icon name="calendar-number-outline"></ion-icon> 01/12/2001</ion-col>
+        <ion-col> <ion-icon name="call-outline"></ion-icon> 0962151117</ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row style="align-items: center; margin-left: 50px;">
+        <ion-col> <ion-icon name="home-outline"></ion-icon> Quito - Ecuador</ion-col>
+        <ion-col> <ion-icon name="mail-outline"></ion-icon> Reverb1&#64;outlook.es</ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+
+  <br>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label style="font-size: 25px; font-weight: bold;">Mis Proyectos</ion-label>
+    </ion-list-header>
+
+    
+    <ion-item *ngFor="let project of projects" style="margin-top: 20px; margin-bottom: 20px;">
+      <ion-label>{{ project.title }}</ion-label>
+      <ion-avatar slot="start">
+        <ion-img [src]="project.imageUrl"></ion-img>
+      </ion-avatar>
+      <a href="{{ project.repo }}"><ion-button>GitHub Repo</ion-button></a>
+    </ion-item>
+    
+
+  </ion-list>
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">Contacto</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content style="display: flex; justify-content: space-evenly;" >
+      <a href="https://github.com/J-Pinos3?tab=repositories">
+        <ion-icon name="logo-github" class="social-icon" style="height: 50px; width: 50px;"></ion-icon>
+      </a>
+
+      <a href="MAILTO: Reverb1@outlook.es">
+        <ion-icon name="mail" class="social-icon" style="height: 50px; width: 50px;"></ion-icon>
+      </a>
+
+    </ion-card-content>
+  </ion-card>
+
+
 </ion-content>
