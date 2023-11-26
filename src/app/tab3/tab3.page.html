@@ -1,17 +1,122 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-menu side="end" contentId="main-content">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title>Menú</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-content>
+    <ion-list>
+      <ion-item (click)="scrollTo('sobreMi'); closeMenu()">Sobre Mí</ion-item>
+      <ion-item (click)="scrollTo('proyectos'); closeMenu()">Proyectos</ion-item>
+      <ion-item (click)="scrollTo('contacto'); closeMenu()">Contacto</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mi Portafolio</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main-content">
+<div id="sobreMi" class="section">
+  <h2>Sobre Mí</h2>
+
+  <ion-row class="about-me-row">
+    <ion-col size="12" size-md="6" class="about-me-image-col">
+      <div class="about-me-image">
+        <img src="https://cdn.myanimelist.net/images/characters/14/417852.jpg" alt="">
+      </div>
+    </ion-col>
+    <ion-col size="12" size-md="6" class="about-me-content">
+      <p>Soy David, un apasionado desarrollador Full Stack con experiencia en la creación de aplicaciones web y móviles.
+        Mi enfoque se centra en proporcionar soluciones creativas y eficientes para los desafíos tecnológicos. Con
+        habilidades que abarcan desde el desarrollo front-end hasta el back-end, estoy constantemente explorando nuevas
+        tecnologías para mejorar mis capacidades.</p>
+    </ion-col>
+
+
+  </ion-row>
+</div>
+
+  <div id="proyectos" class="section">
+    <h2>Proyectos</h2>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Portafolio</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <img src="https://pngimg.com/d/github_PNG32.png" alt="Proyecto 1">
+        <p>Diseñado en js html y css</p>
+      </ion-card-content>
+
+      <ion-card-footer>
+        <ion-button expand="full" href="https://github.com/DAVIDS2405/Portfolio" >Ver más</ion-button>
+      </ion-card-footer>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Novabit</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <img src="https://pngimg.com/d/github_PNG32.png" alt="Proyecto 2">
+        <p>Diseñado con angular</p>
+      </ion-card-content>
+
+      <ion-card-footer>
+        <ion-button expand="full" href="https://github.com/DAVIDS2405/Novabit" >Ver más</ion-button>
+      </ion-card-footer>
+    </ion-card>
+
+  </div>
+
+<div id="contacto" class="section">
+  <h2>Contacto</h2>
+
+  <p>Puedes contactarme en las siguientes redes sociales:</p>
+
+  <ion-row class="social-icons-row">
+    <ion-col size="4" class="social-icon-col">
+      <a href="https://github.com/DAVIDS2405" target="_blank">
+        <ion-icon name="logo-github" class="social-icon"></ion-icon>
+      </a>
+    </ion-col>
+
+    <ion-col size="4" class="social-icon-col">
+      <a href="MAILTO:sebastian2405lucero@gmail.com" target="_blank">
+        <ion-icon name="mail" class="social-icon"></ion-icon>
+      </a>
+    </ion-col>
+
+    <ion-col size="4" class="social-icon-col">
+      <a href="https://www.linkedin.com/in/david-sebastian-basantes-lucero-40bb97216/" target="_blank">
+        <ion-icon name="logo-linkedin" class="social-icon"></ion-icon>
+      </a>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="social-icons-row">
+    <ion-col size="4" class="social-icon-col">
+      <a href="https://www.youtube.com/channel/UC3jN804Q3DZMwLWvUsRrTVg" target="_blank">
+        <ion-icon name="logo-youtube" class="social-icon"></ion-icon>
+      </a>
+    </ion-col>
+
+    <ion-col size="4" class="social-icon-col">
+      <a href="https://www.tiktok.com/@davids2405" target="_blank">
+        <ion-icon name="logo-tiktok" class="social-icon"></ion-icon>
+      </a>
+    </ion-col>
+
+  </ion-row>
+</div>
 </ion-content>

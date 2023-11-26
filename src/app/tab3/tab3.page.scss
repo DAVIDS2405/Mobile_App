@@ -1,0 +1,55 @@
+.section h2{
+  text-align: center;
+}
+.section p{
+  text-align: justify;
+}
+.social-icons-row {
+  display: flex;
+  justify-content: center;
+}
+
+.social-icon-col {
+  display: flex;
+  justify-content: center;
+}
+
+.social-icon {
+  font-size: 40px; /* Tamaño del icono */
+  border-radius: 50%; /* Borde circular */
+  margin: 10px; /* Espaciado entre iconos */
+  padding: 10px; /* Espaciado interno del icono */
+  background-color: #3498db; /* Color de fondo, reemplázalo con tu color preferido */
+  color: #fff; /* Color del icono */
+}
+
+.about-me-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.about-me-content {
+  padding: 10px;
+}
+
+.about-me-image-col {
+  display: flex;
+  align-items: center;
+}
+
+.about-me-image {
+  width: 150px;
+  height: 150px;
+  background-color: #3498db; /* Color de fondo, reemplázalo con tu color preferido */
+  border-radius: 50%; /* Forma circular */
+  margin: auto; /* Centrar la imagen verticalmente */
+  overflow: hidden;
+}
+
+.about-me-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajusta el tamaño de la imagen para cubrir completamente el contenedor circular */
+}
+
+
