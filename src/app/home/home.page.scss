@@ -1,0 +1,40 @@
+
+
+
+.circle-section {
+  height: 100vh;
+  ion-col {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+    .circle-item {
+      text-align: center;
+
+      .circle-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden; /* Añadido para forzar el recorte circular */
+        object-fit: cover;
+        margin-bottom: 5px;
+
+      }
+
+      .name-label {
+        margin: 0;
+      }
+    }
+  }
+}
+.button-content{
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+ion-title{
+  text-align: center;
+  font-size: xx-large;
+}

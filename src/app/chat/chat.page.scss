@@ -1,0 +1,62 @@
+ion-title{
+  text-align: center;
+  font-size: xx-large;
+}
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.right-side {
+  text-align: right;
+}
+
+.left-side {
+  text-align: left;
+}
+.chat_list{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+/* Estilo para los mensajes generales */
+.users {
+  max-width: 80%;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 16px;
+
+}
+
+/* Estilo para los mensajes propios */
+.users.right-side {
+  background: linear-gradient(to bottom, #87CEFA, #00BFFF) !important;
+  align-self: flex-end;
+  border-radius:16px ;
+
+}
+
+/* Estilo para los mensajes de otros usuarios */
+.users.left-side {
+  background: blueviolet !important;
+  border-radius: 16px;
+  align-self: flex-start;
+}
+.chat-glob{
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.username{
+  margin-bottom: 10px;
+  color: rgb(14, 190, 117);
+  font-weight: bold;
+}
+.message-content{
+  width: 100%;
+  text-wrap:balance ;
+}
+

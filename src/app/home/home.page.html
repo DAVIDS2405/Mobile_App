@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Creadores
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Creadores</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-row class="circle-section">
+      @for (item of people; track $index) {
+        <ion-col size="4">
+          <div class="circle-item">
+            <ion-img class="circle-img" [src]="item.image"></ion-img>
+            <ion-label class="name-label">{{ item.name }}</ion-label>
+          </div>
+        </ion-col>
+      }
+     <ion-row class="button-content">
+      <ion-button shape="round" size="large" routerLink = "/chat">Comenzar Chat</ion-button>
+     </ion-row>
+
+    </ion-row>
+  </ion-content>
+</ion-content>

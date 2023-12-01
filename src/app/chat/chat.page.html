@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Chat</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list inset="true" lines="none" class="chat_list">
+    @for (message of messages; track $index) {
+    <ion-item class="users" [ngClass]="{'right-side': message.username === username, 'left-side': message.username !== username}">
+      <div class="chat-glob">
+        <div class="username">{{ message.username }}</div>
+        <div class="message-content">{{ message.message }}</div>
+    </div>
+
+    </ion-item>
+    }
+
+  </ion-list>
+  <ion-item class="fixed-bottom">
+    <ion-input class="text-message" [(ngModel)]="newMessage" placeholder="Escribe un mensaje..."></ion-input>
+    <ion-button (click)="sendMessage()" shape="round" size="default">
+      <ion-icon name="arrow-forward-outline" slot="icon-only"></ion-icon> </ion-button>
+  </ion-item>
+</ion-content>
+
