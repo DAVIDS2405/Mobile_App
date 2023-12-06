@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    <ion-button (click)="getCurrentCoordinate()" expand="block">
+      ubicacion
+    </ion-button>
+    <ion-list>
+      <ion-list-header>
+        Cordenadas
+      </ion-list-header>
+      <ion-item>
+        <ion-label>
+          latitud
+        </ion-label>
+        <ion-badge color="danger" slot="end">{{latitude}}</ion-badge>
+      </ion-item>
+        <ion-item>
+          <ion-label>
+            longitud
+          </ion-label>
+          <ion-badge color="danger"slot="end">
+            {{longitude}}
+          </ion-badge>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+              <ion-button href="{{url}}" target="_blank"> Ir al maps</ion-button>
+            </ion-label>
+        </ion-item>
+
+    </ion-list>
+  </div>
+</ion-content>
