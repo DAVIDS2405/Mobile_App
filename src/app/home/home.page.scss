@@ -1,0 +1,24 @@
+.center-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+form {
+  width: 100%;
+}
+.button-login {
+  margin-top: 25px;
+}
+
+.forgot-password {
+  margin-top: 10px; /* Espaciado entre el botón y el enlace "¿Olvidaste tu contraseña?" */
+}
+
+.forgot-password-label {
+  cursor: pointer;
+  color: rgb(0, 4, 255); /* Puedes cambiar el color según tu estilo */
+  text-decoration: underline;
+}

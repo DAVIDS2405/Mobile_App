@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Iniciar Sesión
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <section class="center-login">
+    <form (ngSubmit)="onLogin()">
+      <ion-item>
+        <ion-label position="floating">Correo Electrónico</ion-label>
+        <ion-input type="email" [(ngModel)]="user.email" name="email" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password" name="password" required></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" class="button-login">Iniciar Sesión</ion-button>
+    </form>
+    <div class="forgot-password">
+      <ion-label (click)="goToSignupPage()" class="forgot-password-label">¿Olvidaste tu contraseña?</ion-label>
+    </div>
+  </section>
+
+</ion-content>

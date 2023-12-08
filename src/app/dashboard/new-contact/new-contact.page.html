@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Crear nuevo contacto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="contactName" name="contactName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input type="text" [(ngModel)]="contactLastName" name="contactLastName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Número de Celular</ion-label>
+      <ion-input type="tel" [(ngModel)]="contactPhoneNumber" name="contactPhoneNumber"></ion-input>
+    </ion-item>
+
+    <!-- Puedes agregar más campos según tus necesidades -->
+
+  </ion-list>
+
+  <ion-button expand="full" (click)="createNewContact()">Crear Contacto</ion-button>
+
+</ion-content>
