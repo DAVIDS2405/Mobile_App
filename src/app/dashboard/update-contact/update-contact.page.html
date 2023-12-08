@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard/contact"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar contacto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="contacto.name" name="name" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Apellido</ion-label>
+    <ion-input [(ngModel)]="contacto.lastName" name="lastName" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Número de celular</ion-label>
+    <ion-input [(ngModel)]="contacto.phoneNumber" name="phoneNumber" required></ion-input>
+  </ion-item>
+
+  <!-- Agrega otros campos según tu modelo de datos -->
+
+  <ion-button expand="full" (click)="guardarCambios()">Guardar cambios</ion-button>
+</ion-content>

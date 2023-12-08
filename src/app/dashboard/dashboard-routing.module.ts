@@ -26,6 +26,13 @@ const routes: Routes = [
             (m) => m.NewContactPageModule
           ),
       },
+      {
+        path: 'update-contact/:id',
+        loadChildren: () =>
+          import('./update-contact/update-contact.module').then(
+            (m) => m.UpdateContactPageModule
+          ),
+      },
     ],
   },
 ];

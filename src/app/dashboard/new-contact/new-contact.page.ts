@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ContactService } from 'src/app/services/contact.service';
+import { Geolocation, GeolocationPosition } from '@capacitor/geolocation';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-contact',
@@ -13,21 +15,27 @@ export class NewContactPage {
   contactPhoneNumber: string = '';
 
   constructor(
+    private router: Router,
     private contactService: ContactService,
     private alertController: AlertController
   ) {}
 
   async createNewContact() {
     try {
+      // Obtén la posición geográfica antes de crear el contacto
+      const position = await this.getCurrentPosition();
+
+      // Llama a la función para crear el contacto, pasando la posición geográfica
       await this.contactService.createContact(
         this.contactName,
         this.contactLastName,
-        this.contactPhoneNumber
+        this.contactPhoneNumber,
+        position
       );
 
       // Limpia los datos después de la creación del contacto
       this.clearFormData();
-
+      this.router.navigate(['/dashboard/contact']);
       // Muestra un mensaje de éxito
       this.presentAlert('Éxito', 'El contacto se creó correctamente.');
     } catch (error) {
@@ -36,6 +44,14 @@ export class NewContactPage {
       this.presentAlert('Error', 'Hubo un error al crear el contacto.');
     }
   }
+
+  async getCurrentPosition(): Promise<GeolocationPosition> {
+    // Utiliza Capacitor Geolocation para obtener la posición actual
+    const position: GeolocationPosition =
+      await Geolocation.getCurrentPosition();
+    return position;
+  }
+
   clearFormData() {
     // Limpia los campos del formulario
     this.contactName = '';
