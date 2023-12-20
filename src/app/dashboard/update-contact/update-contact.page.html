@@ -22,8 +22,17 @@
     <ion-label position="floating">Número de celular</ion-label>
     <ion-input [(ngModel)]="contacto.phoneNumber" name="phoneNumber" required></ion-input>
   </ion-item>
+  <ion-item *ngIf="!selectedFile"class="image-item">
+    <ion-label>Foto anterior</ion-label>
+    <img *ngIf="contacto.downloadUrl" [src]="contacto.downloadUrl" [alt]="contacto.name" >
+  </ion-item>
+  <ion-item class="image-item">
+    <ion-label>Foto de perfil</ion-label>
+    <ion-button (click)="takePhoto()">Tomar foto</ion-button>
+    <ion-button (click)="selectFromGallery()">Seleccionar de la galería</ion-button>
 
-  <!-- Agrega otros campos según tu modelo de datos -->
+    <img *ngIf="selectedFile" [src]="selectedFile.webPath" [alt]="selectedFile.dataUrl" width="100">
+  </ion-item>
 
   <ion-button expand="full" (click)="guardarCambios()">Guardar cambios</ion-button>
 </ion-content>

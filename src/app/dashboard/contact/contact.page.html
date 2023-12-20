@@ -9,6 +9,12 @@
     <ng-container *ngIf="contactos.length > 0; else noContactsFound">
       <ion-slide *ngFor="let contacto of contactos">
         <ion-card>
+          <div class="avatar-container">
+            <ion-img src="{{contacto.downloadUrl}}" alt="Imagen del perfil" >
+
+            </ion-img>
+          </div>
+
           <ion-card-header class="contacto-header">
             {{ contacto.name }} {{ contacto.lastName }}
           </ion-card-header>

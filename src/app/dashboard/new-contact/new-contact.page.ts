@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 import { ContactService } from 'src/app/services/contact.service';
 import { Geolocation, GeolocationPosition } from '@capacitor/geolocation';
+import {
+  Camera,
+  CameraResultType,
+  CameraSource,
+  Photo,
+} from '@capacitor/camera';
 import {  Router } from '@angular/router';
 
 @Component({
@@ -9,28 +15,37 @@ import {  Router } from '@angular/router';
   templateUrl: './new-contact.page.html',
   styleUrls: ['./new-contact.page.scss'],
 })
-export class NewContactPage {
+export class NewContactPage implements OnInit {
   contactName: string = '';
   contactLastName: string = '';
   contactPhoneNumber: string = '';
+  selectedFile: Photo | null = null;
 
   constructor(
     private router: Router,
     private contactService: ContactService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private platform: Platform
   ) {}
+
+  ngOnInit() {
+    Camera.requestPermissions();
+  }
 
   async createNewContact() {
     try {
       // Obtén la posición geográfica antes de crear el contacto
       const position = await this.getCurrentPosition();
-
+      if (!this.selectedFile) {
+        throw new Error('Debes seleccionar una imagen de perfil.');
+      }
       // Llama a la función para crear el contacto, pasando la posición geográfica
       await this.contactService.createContact(
         this.contactName,
         this.contactLastName,
         this.contactPhoneNumber,
-        position
+        position,
+        this.selectedFile
       );
 
       // Limpia los datos después de la creación del contacto
@@ -38,10 +53,10 @@ export class NewContactPage {
       this.router.navigate(['/dashboard/contact']);
       // Muestra un mensaje de éxito
       this.presentAlert('Éxito', 'El contacto se creó correctamente.');
-    } catch (error) {
+    } catch (error: any) {
       // Maneja el error y muestra un mensaje de error
-      console.error('Error al crear el contacto:', error);
-      this.presentAlert('Error', 'Hubo un error al crear el contacto.');
+
+      this.presentAlert('Error', error.toString());
     }
   }
 
@@ -57,6 +72,7 @@ export class NewContactPage {
     this.contactName = '';
     this.contactLastName = '';
     this.contactPhoneNumber = '';
+    this.selectedFile = null
   }
 
   async presentAlert(title: string, message: string) {
@@ -68,4 +84,24 @@ export class NewContactPage {
 
     await alert.present();
   }
+  async takePhoto () {
+    const photo = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
+      allowEditing: true,
+      quality: 100,
+    });
+    this.selectedFile = photo
+  };
+
+  async selectFromGallery() {
+    const photo = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Photos,
+      quality: 100,
+    });
+    this.selectedFile = photo;
+  }
+
+
 }

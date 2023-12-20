@@ -30,7 +30,6 @@ export class SignupPage {
       // Si el registro es exitoso, redirige a la página deseada (por ejemplo, el inicio de sesión)
       this.router.navigate(['/home']);
     } catch (error:any) {
-      console.error('Error al registrarse:', error);
 
       // Manejar errores y mostrar un mensaje al usuario
       let errorMessage = 'Error al registrarse.';

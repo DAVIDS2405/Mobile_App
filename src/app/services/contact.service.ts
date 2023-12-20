@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map,switchMap } from 'rxjs/operators';
 import { GeolocationPosition } from '@capacitor/geolocation';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Photo } from '@capacitor/camera';
 
 @Injectable({
   providedIn: 'root',
@@ -11,20 +13,42 @@ import { GeolocationPosition } from '@capacitor/geolocation';
 export class ContactService {
   constructor(
     private firestore: AngularFirestore,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private storage: AngularFireStorage
   ) {}
 
   async createContact(
     name: string,
     lastName: string,
     phoneNumber: string,
-    geolocation: GeolocationPosition
+    geolocation: GeolocationPosition,
+    imageFile: Photo
   ): Promise<any> {
     try {
       const user = await this.afAuth.currentUser;
       if (!user) {
         throw new Error('Usuario no autenticado');
       }
+      const contactsCollection: AngularFirestoreCollection<any> =this.firestore.collection('contacts');
+
+      const existingContacts = await contactsCollection.ref
+        .where('userId', '==', user.uid)
+        .where('name', '==', name)
+        .where('lastName', '==', lastName)
+        .where('phoneNumber', '==', phoneNumber)
+        .get();
+
+      if (!existingContacts.empty) {
+        // Ya existe un contacto con la misma información
+        throw new Error('Este contacto ya existe.');
+      }
+      const imageString = await this.toBase64(imageFile);
+      const imagePath = `contact-images/${user.uid}/${name}`;
+      const imageUploadTask = this.storage
+        .ref(imagePath)
+        .putString(imageString, 'data_url');
+      const imageUrl = await from(imageUploadTask).toPromise();
+      const downloadUrl = await imageUrl?.ref.getDownloadURL();
 
       const contactData = {
         name,
@@ -35,6 +59,7 @@ export class ContactService {
           latitude: geolocation.coords.latitude,
           longitude: geolocation.coords.longitude,
         },
+        downloadUrl,
       };
 
       const result = await this.firestore
@@ -43,10 +68,6 @@ export class ContactService {
 
       return result;
     } catch (error) {
-      console.error(
-        'Error al obtener la geolocalización o al almacenar en Firebase:',
-        error
-      );
       throw error;
     }
   }
@@ -107,5 +128,31 @@ export class ContactService {
         }
       });
     });
+  }
+
+  private async toBase64(image: Photo): Promise<string> {
+    try {
+      if (!image || !image.webPath) {
+        throw new Error('Image path is undefined or null');
+      }
+
+      const response = await fetch(image.webPath);
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch image');
+      }
+
+      const blob = await response.blob();
+
+      return new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = () => resolve(reader.result as string);
+        reader.readAsDataURL(blob);
+      });
+    } catch (error) {
+
+      throw error;
+    }
   }
 }
